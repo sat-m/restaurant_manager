@@ -1,6 +1,14 @@
-ion-item.form-wrapper{
+.form-wrapper{
   --ion-background-color:#ededed;
   margin-top:30px;
+  padding: 20px;
+}
+
+.sidebar-flex{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 ion-content {

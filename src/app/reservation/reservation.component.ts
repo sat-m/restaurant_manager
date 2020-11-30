@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AppState } from '../store';
 import { addReservation } from '../store/tables/tables.actions';
 import { Reservation, Table } from '../store/tables/tables.reducer';
-import { tablesListSelector } from '../store/tables/tables.selector';
+import { nonReservedTablesSelector, tablesListSelector } from '../store/tables/tables.selector';
 
 @Component({
   selector: 'reservation',
@@ -26,7 +26,7 @@ export class ReservationComponent implements OnInit {
       startDate: ['', Validators.required]
     });
     this.currentDate = new Date().toISOString();
-    this.tables$ = this.store.select(tablesListSelector);
+    this.tables$ = this.store.select(nonReservedTablesSelector);
   }
 
   makeReservation() {

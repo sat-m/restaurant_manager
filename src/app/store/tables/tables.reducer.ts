@@ -17,9 +17,9 @@ export interface Table {
   reservation?: Reservation
 }
 
- interface Filters {
-  fromDate?:null | number,
-  endDate? : null | number,
+interface Filters {
+  fromDate?: null | number,
+  endDate?: null | number,
   numberOfSits?: null | number,
 }
 
@@ -34,7 +34,6 @@ const initialState: TablesState = {
   list: [],
   loading: false,
   error: null,
-  
 };
 
 export const tablesReducer = createReducer(
@@ -61,10 +60,10 @@ export const tablesReducer = createReducer(
     }
   }),
   on(TableActions.addReservation, (state, action) => {
-    const  reserve = action.data;
-    const newList = state.list.map((table)=>{
-      if(table.id === reserve.tableId){
-        return {...table, reservation: reserve};
+    const reserve = action.data;
+    const newList = state.list.map((table) => {
+      if (table.id === reserve.tableId) {
+        return { ...table, reservation: reserve };
       }
       return table
     });
@@ -75,20 +74,41 @@ export const tablesReducer = createReducer(
   }),
   on(TableActions.applyFilter, (state, action) => {
 
-    let filter = {...action.filter};
-
-    if(filter.fromDate) {
+    let filter = { ...action.filter };
+    if (filter.fromDate) {
       filter.fromDate = new Date(filter.fromDate).getTime();
-    } else if(filter.endDate) {
+    } else if (filter.endDate) {
       filter.endDate = new Date(filter.endDate).getTime();
     }
-
-    
     return {
       ...state,
-      filters: {...state.filters, ...filter},
+      filters: { ...state.filters, ...filter },
       list: [...state.list]
     }
+  }),
+  on(TableActions.clearFilter, (state, action) => {
+
+    return {
+      ...state,
+      filters: null,
+      list: [...state.list]
+    }
+  }),
+  on(TableActions.clearReservation, (state, action) => {
+
+    //remove reservation from the table with a tableId
+    const newState = {
+      ...state,
+      list: state.list.map((table) => {
+        if (table.id === action.tableId) {
+          let t = { ...table };
+          delete t.reservation
+          return t;
+        }
+        return table;
+      })
+    }
+
+    return newState;
   })
-  // will also need an action for removing the filters
 );

@@ -5,8 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Store } from '@ngrx/store';
 import { AppState } from './store';
-import { applyFilter } from './store/tables/tables.actions';
-
+import { applyFilter, clearFilter } from './store/tables/tables.actions';
+import { sitsNumberSelector } from './store/tables/tables.selector';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,7 +17,11 @@ export class AppComponent implements OnInit {
   fromDate: string;
   toDate: string;
   minDate: string;
-  numberOfSits: number
+  numberOfSits: number;
+
+  public get anyFilter() {
+    return this.numberOfSits || this.fromDate || this.toDate
+  }
 
   constructor(
     private platform: Platform,
@@ -26,35 +30,33 @@ export class AppComponent implements OnInit {
     private store: Store<AppState>
   ) {
     this.initializeApp();
-    //TODO: sits options to be constructed basedon table sits, dynamically
-    this.sitsOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-    // this.fromDate ;
     this.minDate = new Date().toISOString();
   }
 
   ngOnInit() {
-
+    this.store.select(sitsNumberSelector)
+      .subscribe((sitsOptions) => {
+        this.sitsOptions = sitsOptions;
+      });
   }
 
   filterOnFromDate() {
-    // dispatch a filter action
-    this.store.dispatch(applyFilter({filter: {fromDate: this.fromDate}}))
-    console.log("filterOnFromDate");
+    this.store.dispatch(applyFilter({ filter: { fromDate: this.fromDate } }))
   }
 
   filterOnEndDate() {
-    // dispatch a filter action
-    this.store.dispatch(applyFilter({filter: {endDate: this.toDate}}))
-
-    console.log("filterOnEndDate");
+    this.store.dispatch(applyFilter({ filter: { endDate: this.toDate } }));
   }
 
   filterOnNumberOfSits() {
-    
-    console.log("filterOnNumberOfSits");
-    this.store.dispatch(applyFilter({filter: {numberOfSits: this.numberOfSits}}))
+    this.store.dispatch(applyFilter({ filter: { numberOfSits: this.numberOfSits } }));
+  }
 
-    // dispatch a filter action
+  clearFilter() {
+    this.fromDate = null;
+    this.toDate = null;
+    this.numberOfSits = null;
+    this.store.dispatch(clearFilter());
   }
 
   initializeApp() {

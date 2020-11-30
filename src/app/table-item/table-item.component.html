@@ -7,6 +7,8 @@
 
   <ion-badge color="success" *ngIf="!table.reservation; else reserved">Free</ion-badge>
   <ng-template #reserved>
-    <ion-badge color="danger">Reserved</ion-badge> from {{table.reservation.startDate | date :'h:mm a'}}
+    <ion-badge color="danger">Reservation on {{table.reservation.startDate | date :'h:mm a'}}</ion-badge> 
+    <ion-icon name="close-outline" class="pointer" (click)="removeReservation()">
+    </ion-icon>
   </ng-template>
 </ion-label>

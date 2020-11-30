@@ -2,43 +2,54 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        
 
-        <ion-list id="inbox-list">
-          <ion-title>Filters</ion-title>
-          <ion-item>
-            <ion-label>Number of sits</ion-label>
-            <ion-select [(ngModel)]="numberOfSits" (ionChange)="filterOnNumberOfSits()">
-              <ion-select-option *ngFor="let number of sitsOptions" [value]="number">{{number}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-grid>
-              <ion-row>
-                <ion-label>Reservation Time Range</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-col size="5">
-                  <ion-datetime displayFormat="HH:mm" [min]="minDate" [(ngModel)]="fromDate"
-                    (ionChange)="filterOnFromDate()" placeholder="From"></ion-datetime>
-                </ion-col>
-                <ion-col size="2">
-                  <p>
-                    -
-                  </p>
-                </ion-col>
-                <ion-col size="5">
-                  <ion-datetime displayFormat="HH:mm" [min]="fromDate" [value]="toDate" (ionChange)="filterOnEndDate()"
-                    placeholder="To"></ion-datetime>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-list>
-        
-        <ion-item class="form-wrapper ion-padding">
-          <reservation></reservation>
-        </ion-item>
+        <div class="sidebar-flex">
+          <ion-list id="inbox-list">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="7">
+                <ion-title>Filters</ion-title>
+              </ion-col>
+              <ion-col size="5">
+                <ion-button [hidden]="!anyFilter" color="danger" size="small" (click)="clearFilter()">
+                  <ion-icon name="close-outline">
+                  </ion-icon>
+                  Clear filters
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-item>
+              <ion-label>Number of sits</ion-label>
+              <ion-select [(ngModel)]="numberOfSits" (ionChange)="filterOnNumberOfSits()">
+                <ion-select-option *ngFor="let number of sitsOptions" [value]="number">{{number}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-label>Reservation Time Range</ion-label>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="5">
+                    <ion-datetime displayFormat="HH:mm" [min]="minDate" [(ngModel)]="fromDate"
+                      (ionChange)="filterOnFromDate()" placeholder="From"></ion-datetime>
+                  </ion-col>
+                  <ion-col size="2">
+                    <p>
+                      -
+                    </p>
+                  </ion-col>
+                  <ion-col size="5">
+                    <ion-datetime displayFormat="HH:mm" [min]="fromDate" [value]="toDate"
+                      (ionChange)="filterOnEndDate()" placeholder="To"></ion-datetime>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-list>
+          <div class="form-wrapper">
+            <reservation></reservation>
+          </div>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
