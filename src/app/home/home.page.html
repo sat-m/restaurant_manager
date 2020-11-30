@@ -6,19 +6,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-
-
   <ion-list *ngIf="myTables$ | async as myTables">
     <table-item *ngFor="let table of myTables; let i=index" [table]="table"></table-item>
-    
     <ion-item *ngIf="error" color="danger">
       <p class="ion-text-center"> {{error.message}}</p>
     </ion-item>
     <ion-item *ngIf="!error && !myTables.length " color="warning">
       <p class="ion-text-center"> No tables matching your criteria</p>
     </ion-item>
-  
   </ion-list>
-
- 
 </ion-content>

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { Table } from '../store/tables/tables.reducer';
-import { v4 as uuid } from 'uuid';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

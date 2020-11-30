@@ -16,7 +16,6 @@ import { nonReservedTablesSelector, tableFilteredListSelector } from '../store/t
 export class ReservationComponent implements OnInit {
   reservationForm: FormGroup;
   tables$: Observable<Table[]>;
-
   currentDate: string;
 
   constructor(private store: Store<AppState>, private fb: FormBuilder) { }
@@ -34,14 +33,12 @@ export class ReservationComponent implements OnInit {
     if (this.reservationForm.valid) {
       const values = this.reservationForm.value;
       const reservationDate = new Date(values.startDate).getTime();
-
       const reservation: Reservation = {
         ...this.reservationForm.value,
         startDate: reservationDate
       };
-      console.log(this.reservationForm.value);
-      this.store.dispatch(addReservation({ data: reservation }));
 
+      this.store.dispatch(addReservation({ data: reservation }));
       this.reservationForm.reset();
     }
   }

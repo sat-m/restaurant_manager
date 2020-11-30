@@ -44,12 +44,10 @@ export class TableItemComponent implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 
   removeReservation() {
     this.showReservationRemovalConfirm();
   }
-
 }

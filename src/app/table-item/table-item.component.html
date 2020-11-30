@@ -1,6 +1,6 @@
 <ion-card>
   <ion-item>
-    <ion-avatar >
+    <ion-avatar>
       <img src="assets/icon/favicon.png">
     </ion-avatar>
     <ion-title>Location: {{table.location}}</ion-title>
@@ -13,11 +13,8 @@
       </ng-template>
     </ng-container>
   </ion-item>
-
   <ion-card-content>
-    <b class="larger">{{table.numberOfSits}} sits: </b> 
-    <ion-icon *ngFor="let item of sits" name="man-outline"></ion-icon> 
-    
-  </ion-card-content> 
- 
+    <b class="larger">{{table.numberOfSits}} sits: </b>
+    <ion-icon *ngFor="let item of sits" name="man-outline"></ion-icon>
+  </ion-card-content>
 </ion-card>
