@@ -1,4 +1,4 @@
-## Restaurant Table Manager
+# Restaurant Table Manager
 A tool for reservations
 
 ## Requirements
@@ -11,7 +11,7 @@ Technology that you should use is Angular, NgRx and optionally Ionic. Please cre
 
 It will be nice to have a reservation entry form as well. Reservation is just picking a table and time.
 
-# Summary
+## Summary
 
 The app has been developed with Ionic V5 anf Angular V10. NgRx V10 has been used for state management.
 
