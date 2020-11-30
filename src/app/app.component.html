@@ -1,3 +1,37 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <!-- <ion-title>Search Criteria</ion-title> -->
+
+          <ion-item>
+            <ion-label>Number of sits</ion-label>
+            <ion-select [(ngModel)]="numberOfSits" (ionChange)="filterOnNumberOfSits()">
+              <ion-select-option *ngFor="let sitNumber of sitsOptions">{{sitNumber}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Reserved From</ion-label>
+            <ion-datetime displayFormat="MMMM DD HH:mm" [min]="minDate" [(ngModel)]="fromDate" (ionChange)="filterOnFromDate()"></ion-datetime>
+          </ion-item>
+         
+          <ion-item>
+            <ion-label>Reserved Till</ion-label>
+            <ion-datetime displayFormat="MMMM DD HH:mm" [min]="fromDate" [value]="toDate" (ionChange)="filterOnEndDate()"></ion-datetime>
+          </ion-item>
+
+        </ion-list>
+        <ion-item>
+          <reservation></reservation>
+
+        </ion-item>
+
+        
+
+       
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

@@ -14,17 +14,21 @@ import { StoreModule } from '@ngrx/store';
 import { allReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { TablesEffect } from './store/table.effects';
+import { FormsModule } from '@angular/forms';
+import { ReservationModule } from './reservation/reservation.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule, 
+    FormsModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
     StoreModule.forRoot(allReducers),
     EffectsModule.forRoot([TablesEffect]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    ReservationModule
   ],
   providers: [
     StatusBar,

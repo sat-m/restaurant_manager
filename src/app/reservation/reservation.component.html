@@ -1,0 +1,21 @@
+<div>
+  <ion-title>Make A reservation</ion-title>
+  <ion-item>
+    <ion-label>Select a table</ion-label>
+    <ion-select>
+      <ion-select-option *ngFor="let item of [1,2,3]">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Select Date</ion-label>
+    <ion-datetime displayFormat="MMMM DD HH:mm"></ion-datetime>
+
+  </ion-item>
+
+  <ion-button (click)="makeReservation()" color="primary">Reserve</ion-button>
+</div>
+
+ 
+
+

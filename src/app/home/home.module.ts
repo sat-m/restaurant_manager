@@ -16,6 +16,7 @@ import { TableItemComponent } from '../table-item/table-item.component';
   ],
   declarations: [
     HomePage,
-    TableItemComponent]
+    TableItemComponent
+  ]
 })
 export class HomePageModule { }
