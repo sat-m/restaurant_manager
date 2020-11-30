@@ -1,0 +1,30 @@
+
+{
+  "tables": [{
+    "id": "101",
+    "numberOfSits": 5,
+    "location": "Zone A1"
+  },
+  {
+    "id": "102",
+    "numberOfSits": 4,
+    "location": "Zone A2"
+  },
+  {
+    "id":"103",
+    "numberOfSits": 2,
+    "location": "Zone B1"
+  },
+  {
+    "id": "104",
+    "numberOfSits": 6,
+    "location": "Zone B2"
+  },
+  {
+    "id": "105",
+    "numberOfSits": 4 ,
+    "location": "Zone B3"
+  }]
+}
+
+

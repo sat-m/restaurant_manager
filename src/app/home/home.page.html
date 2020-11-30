@@ -1,32 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      My Reservation Manager
+    <ion-title class="ion-text-center">
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        My Reservation Manager
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
 
   <ion-list *ngIf="myTables$ | async as myTables">
-    <ion-item *ngFor="let table of myTables; let i=index" class="ion-padding-vertical">
-      <table-item [table]="table"></table-item>
+    <table-item *ngFor="let table of myTables; let i=index" [table]="table"></table-item>
+    
+    <ion-item *ngIf="error" color="danger">
+      <p class="ion-text-center"> {{error.message}}</p>
     </ion-item>
-    <ion-item *ngIf="!myTables.length">
+    <ion-item *ngIf="!error && !myTables.length " color="warning">
       <p class="ion-text-center"> No tables matching your criteria</p>
     </ion-item>
-
+  
   </ion-list>
 
  
-
 </ion-content>

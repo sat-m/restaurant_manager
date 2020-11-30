@@ -1,19 +1,29 @@
-.form-wrapper{
-  --ion-background-color:#ededed;
-  margin-top:30px;
-  padding: 20px;
+.form-wrapper {
+  --ion-color: var(--ion-color-light-contrast);
+  margin-top: 20px;
 }
 
-.sidebar-flex{
+.filter-card{
+  --ion-color: var(--ion-color-light-contrast);
+}
+
+.sidebar-flex {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 ion-content {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center; 
+  align-items: center;
+    --background: var(--ion-color-light-tint);
 }
+
+ion-grid {
+  padding: 10px 0;
+}
+
+

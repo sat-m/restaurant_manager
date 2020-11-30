@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -10,7 +10,8 @@ import { sitsNumberSelector } from './store/tables/tables.selector';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   sitsOptions: Array<number>;
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
   numberOfSits: number;
 
   public get anyFilter() {
-    return this.numberOfSits || this.fromDate || this.toDate
+    return this.numberOfSits || this.fromDate || this.toDate;
   }
 
   constructor(
@@ -41,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   filterOnFromDate() {
-    this.store.dispatch(applyFilter({ filter: { fromDate: this.fromDate } }))
+    this.store.dispatch(applyFilter({ filter: { fromDate: this.fromDate } }));
   }
 
   filterOnEndDate() {
@@ -53,7 +54,7 @@ export class AppComponent implements OnInit {
   }
 
   clearFilter() {
-    this.fromDate = null;
+    this.fromDate = undefined;
     this.toDate = null;
     this.numberOfSits = null;
     this.store.dispatch(clearFilter());

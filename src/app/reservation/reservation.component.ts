@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../store';
 import { addReservation } from '../store/tables/tables.actions';
 import { Reservation, Table } from '../store/tables/tables.reducer';
-import { nonReservedTablesSelector, tablesListSelector } from '../store/tables/tables.selector';
+import { nonReservedTablesSelector, tableFilteredListSelector } from '../store/tables/tables.selector';
 
 @Component({
-  selector: 'reservation',
+  selector: 'reservation-form',
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReservationComponent implements OnInit {
   reservationForm: FormGroup;
@@ -31,8 +32,8 @@ export class ReservationComponent implements OnInit {
 
   makeReservation() {
     if (this.reservationForm.valid) {
-      let values = this.reservationForm.value;
-      let reservationDate = new Date(values.startDate).getTime();
+      const values = this.reservationForm.value;
+      const reservationDate = new Date(values.startDate).getTime();
 
       const reservation: Reservation = {
         ...this.reservationForm.value,

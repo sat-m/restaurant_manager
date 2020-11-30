@@ -1,14 +1,23 @@
-<!-- <ion-avatar slot="start">
-  <img src="./avatar-rey.png">
-</ion-avatar> -->
-<ion-label>
-  <h2>{{table.location}}</h2>
-  <p>Number of sits: {{table.numberOfSits}}</p>
+<ion-card>
+  <ion-item>
+    <ion-avatar >
+      <img src="assets/icon/favicon.png">
+    </ion-avatar>
+    <ion-title>Location: {{table.location}}</ion-title>
+    <ng-container slot="end">
+      <ion-badge color="success" *ngIf="!table.reservation; else reserved">Available</ion-badge>
+      <ng-template #reserved>
+        <ion-badge color="danger">Reserved for {{table.reservation.startDate | date :'HH:mm'}}</ion-badge>
+        <ion-icon name="close-outline" class="pointer" (click)="removeReservation()">
+        </ion-icon>
+      </ng-template>
+    </ng-container>
+  </ion-item>
 
-  <ion-badge color="success" *ngIf="!table.reservation; else reserved">Free</ion-badge>
-  <ng-template #reserved>
-    <ion-badge color="danger">Reservation on {{table.reservation.startDate | date :'h:mm a'}}</ion-badge> 
-    <ion-icon name="close-outline" class="pointer" (click)="removeReservation()">
-    </ion-icon>
-  </ng-template>
-</ion-label>
+  <ion-card-content>
+    <b class="larger">{{table.numberOfSits}} sits: </b> 
+    <ion-icon *ngFor="let item of sits" name="man-outline"></ion-icon> 
+    
+  </ion-card-content> 
+ 
+</ion-card>

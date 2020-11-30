@@ -3,12 +3,11 @@ import { Table, tablesReducerKey, TablesState } from './tables.reducer';
 
 const tablesFeatureSelector = createFeatureSelector<TablesState>(tablesReducerKey);
 
-export const tablesListSelector = createSelector(
+export const tableFilteredListSelector = createSelector(
   tablesFeatureSelector,
   (tablesState) => {
-    let list = [...tablesState.list]
+    let list = [...tablesState.list];
     if (tablesState.filters) {
-      //if there is a filter on number of sits, filter, if there is an fromDate filter also, if there is an endDate fitler again
       const filters = tablesState.filters;
       if (filters.numberOfSits) {
         list = list.filter((table) => {
@@ -28,7 +27,7 @@ export const tablesListSelector = createSelector(
     }
     return list;
   }
-)
+);
 
 export const nonReservedTablesSelector = createSelector(
   tablesFeatureSelector,
@@ -36,19 +35,24 @@ export const nonReservedTablesSelector = createSelector(
     // return only the tables that do not have reservation
     return tablesState.list.filter((table) => {
       return !table.reservation;
-    })
+    });
   }
-)
+);
 
 export const sitsNumberSelector = createSelector(
   tablesFeatureSelector,
   (tablesState) => {
-    let list = [];
+    const list = [];
     tablesState.list.forEach((table) => {
       if (list.indexOf(table.numberOfSits) === -1) {
         list.push(table.numberOfSits);
       }
     });
-    return list.sort()
+    return list.sort();
   }
-)
+);
+
+export const errorSelector = createSelector(
+  tablesFeatureSelector,
+  (state) => state.error
+);

@@ -1,23 +1,25 @@
 <ion-card>
   <ion-card-header>
-    <ion-card-title>Make A reservation</ion-card-title>
+    <ion-card-title >
+      <ion-icon name="book-outline"></ion-icon>
+      Make a Reservation</ion-card-title>
   </ion-card-header>
 
   <ion-card-content [formGroup]="reservationForm">
     <ion-item>
       <ion-label>Table</ion-label>
-      <ion-select formControlName="tableId">
+      <ion-select interface="action-sheet" mode="ios" formControlName="tableId">
         <ion-select-option *ngFor="let item of tables$ | async" [value]="item.id">{{item.location}}</ion-select-option>
       </ion-select>
     </ion-item>
   
     <ion-item class="ion-margin-bottom">
       <ion-label>Date</ion-label>
-      <ion-datetime formControlName="startDate" displayFormat="MMMM DD HH:mm" [min]="currentDate"></ion-datetime>
+      <ion-datetime mode="ios" formControlName="startDate" displayFormat="HH:mm" [min]="currentDate"></ion-datetime>
   
     </ion-item>
     <div class="center">
-      <ion-button (click)="makeReservation()" color="primary" class="">Reserve</ion-button>
+      <ion-button [disabled]="!reservationForm.valid" (click)="makeReservation()" color="success" class="">Reserve</ion-button>
   
     </div>
   </ion-card-content>

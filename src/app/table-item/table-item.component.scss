@@ -1,3 +1,11 @@
 .pointer{
   cursor: pointer;
 }
+
+ion-avatar {
+  --border-radius:0;
+}
+
+b.larger {
+  font-size: 18px;
+}

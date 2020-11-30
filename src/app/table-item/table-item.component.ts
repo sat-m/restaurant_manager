@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { Table } from '../store/tables/tables.reducer';
@@ -9,13 +9,20 @@ import { AlertController } from '@ionic/angular';
   selector: 'table-item',
   templateUrl: './table-item.component.html',
   styleUrls: ['./table-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableItemComponent implements OnInit {
   @Input() table: Table;
-
+  @Input() index: number;
+  sits: Array<number>;
   constructor(private store: Store<AppState>, public alert: AlertController) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.sits = [];
+    for (let index = 0; index < this.table.numberOfSits; index++) {
+      this.sits.push(1);
+    }
+   }
 
   async showReservationRemovalConfirm() {
     const alert = await this.alert.create({
@@ -32,7 +39,7 @@ export class TableItemComponent implements OnInit {
         }, {
           text: 'Yes',
           handler: () => {
-            this.store.dispatch(clearReservation({ tableId: this.table.id }))
+            this.store.dispatch(clearReservation({ tableId: this.table.id }));
           }
         }
       ]
