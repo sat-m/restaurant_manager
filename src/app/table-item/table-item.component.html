@@ -5,5 +5,8 @@
   <h2>{{table.location}}</h2>
   <p>Number of sits: {{table.numberOfSits}}</p>
 
-  <b>Reservation status: Reserved</b>
+  <ion-badge color="success" *ngIf="!table.reservation; else reserved">Free</ion-badge>
+  <ng-template #reserved>
+    <ion-badge color="danger">Reserved</ion-badge> from {{table.reservation.startDate | date :'h:mm a'}}
+  </ng-template>
 </ion-label>

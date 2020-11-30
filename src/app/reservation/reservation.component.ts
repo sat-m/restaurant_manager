@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../store';
+import { addReservation } from '../store/tables/tables.actions';
+import { Reservation, Table } from '../store/tables/tables.reducer';
+import { tablesListSelector } from '../store/tables/tables.selector';
 
 @Component({
   selector: 'reservation',
@@ -8,19 +14,35 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class ReservationComponent implements OnInit {
   reservationForm: FormGroup;
-  constructor() { }
+  tables$: Observable<Table[]>;
+
+  currentDate: string;
+
+  constructor(private store: Store<AppState>, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.reservationForm = new FormGroup({
-      tableId: new FormControl(''),
-      startDate: new FormControl(''),
+    this.reservationForm = this.fb.group({
+      tableId: ['', Validators.required],
+      startDate: ['', Validators.required]
     });
-
-
+    this.currentDate = new Date().toISOString();
+    this.tables$ = this.store.select(tablesListSelector);
   }
 
-  makeReservation(){
-    debugger
+  makeReservation() {
+    if (this.reservationForm.valid) {
+      let values = this.reservationForm.value;
+      let reservationDate = new Date(values.startDate).getTime();
+
+      const reservation: Reservation = {
+        ...this.reservationForm.value,
+        startDate: reservationDate
+      };
+      console.log(this.reservationForm.value);
+      this.store.dispatch(addReservation({ data: reservation }));
+
+      this.reservationForm.reset();
+    }
   }
 
 }

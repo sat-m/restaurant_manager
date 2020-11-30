@@ -13,7 +13,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { allReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
-import { TablesEffect } from './store/table.effects';
+import { TablesEffect } from './store/tables/table.effects';
 import { FormsModule } from '@angular/forms';
 import { ReservationModule } from './reservation/reservation.module';
 

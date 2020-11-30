@@ -1,10 +1,10 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { tablesReducer, tablesReducerKey, TablesState } from './tables.reducer';
+import { tablesReducer, tablesReducerKey, TablesState } from './tables/tables.reducer';
 
 export interface AppState {
-  [tablesReducerKey]: TablesState
+  [tablesReducerKey]: TablesState,
 }
 
 export const allReducers:ActionReducerMap<AppState> = {
-  [tablesReducerKey]: tablesReducer
+  [tablesReducerKey]: tablesReducer,
 }

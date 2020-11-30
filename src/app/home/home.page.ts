@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../store';
-import { loadTablesList } from '../store/tables.actions';
-import { Table } from '../store/tables.reducer';
-import { tablesListSelector } from '../store/tables.selector';
+import { loadTablesList } from '../store/tables/tables.actions';
+import { Table } from '../store/tables/tables.reducer';
+import { tablesListSelector } from '../store/tables/tables.selector';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +18,6 @@ export class HomePage implements OnInit {
 
   ngOnInit(){
     this.store.dispatch(loadTablesList());
-    this.myTables$ = this.store.select(tablesListSelector)
+    this.myTables$ = this.store.select(tablesListSelector, null)
   }
 }

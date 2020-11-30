@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { Table } from '../store/tables.reducer';
+import { Table } from '../store/tables/tables.reducer';
 import { v4 as uuid } from 'uuid';
 
 @Injectable({
@@ -27,6 +27,11 @@ export class TablesService {
       id: uuid(),
       numberOfSits: 6,
       location: "Bottom Right Corner"
+    },
+    {
+      id: uuid(),
+      numberOfSits:4 ,
+      location: "Center"
     }
   ];
 

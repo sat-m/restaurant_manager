@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Table } from '../store/tables.reducer';
+import { Table } from '../store/tables/tables.reducer';
 
 @Component({
   selector: 'table-item',

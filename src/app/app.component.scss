@@ -1,0 +1,11 @@
+ion-item.form-wrapper{
+  --ion-background-color:#ededed;
+  margin-top:30px;
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center; 
+}
